@@ -44,6 +44,10 @@ function App() {
     searchTV(string);
   }
 
+  useEffect(() => {
+    searchShows(search)
+  }, [])
+
   const flag = (string) => {
     let code = string.toUpperCase()
 
@@ -54,6 +58,12 @@ function App() {
       "DA": "DK",
       "KO": "KR",
       "ZH": "CN",
+      "UR": "PK",
+      "HI": "IN",
+      "AB": "GE",
+      "KA": "GE",
+      "EL": "GR",
+      "HE": "IL"
     }
 
     code = codesCorrection[code] ? codesCorrection[code] : code
@@ -71,18 +81,22 @@ function App() {
     }
 
     // check if there is any half star
-    if (vote_average % 2 !== 0) {
+    if (Math.round(vote_average) % 2 !== 0) {
       stars.push('half')
     }
 
+    // console.log(stars)
+    // console.log(stars.length)
+    const currentStars = stars.length
+
     // check if there is any empty star
-    for (let i = 0; i < 5 - stars.length; i++) {
+    for (let i = 0; i < 5 - currentStars; i++) {
       stars.push('empty')
     }
 
     // return the stars
     return stars.map((star, index) => {
-      return <span key={index}>
+      return <span key={index} className="stars">
         {star === 'full' && <i className="fa-solid fa-star"></i>}
         {star === 'half' && <i className="fa-solid fa-star-half-stroke"></i>}
         {star === 'empty' && <i className="fa-regular fa-star"></i>}
@@ -100,15 +114,18 @@ function App() {
         {movies.map((movie) => {
           return <li key={movie.id}>
             <div className="movieCard">
-              <h2>{movie.title}</h2>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={movie.title}
               />
-              <p>{movie.original_title}</p>
-              {flag(movie.original_language)}
-              <div>
-                {starredVotes(movie.vote_average)} ({movie.vote_count})
+              <div className="movieCard-overlay">
+                <h2>{movie.title}</h2>
+                <p><strong>Original title:</strong> {movie.original_title}</p>
+                <div>
+                  {flag(movie.original_language)}
+                  {starredVotes(movie.vote_average)} ({movie.vote_count})
+                </div>
+                <p className="overview">{movie.overview}</p>
               </div>
             </div>
           </li>
@@ -121,15 +138,18 @@ function App() {
         {TV.map((show) => {
           return <li key={show.id}>
             <div className="movieCard">
-              <h2>{show.name}</h2>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
                 alt={show.name}
               />
-              <p>{show.original_name}</p>
-              {flag(show.original_language)}
-              <div>
-                {starredVotes(show.vote_average)} ({show.vote_count})
+              <div className="movieCard-overlay">
+                <h2>{show.name}</h2>
+                <p><strong>Original name:</strong> {show.original_name}</p>
+                <div>
+                  {flag(show.original_language)}
+                  {starredVotes(show.vote_average)} ({show.vote_count})
+                </div>
+                <p className="overview">{show.overview}</p>
               </div>
             </div>
           </li>
