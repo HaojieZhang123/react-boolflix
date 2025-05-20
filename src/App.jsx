@@ -53,11 +53,41 @@ function App() {
       "JA": "JP",
       "DA": "DK",
       "KO": "KR",
+      "ZH": "CN",
     }
 
     code = codesCorrection[code] ? codesCorrection[code] : code
 
     return <ReactCountryFlag countryCode={code} />
+  }
+
+  const starredVotes = (vote_average) => {
+    let stars = []
+
+    // vote is 10 based. round the vote_average to the nearest integer
+    // then divide it by to to round it to the nearest 0.5
+    for (let i = 0; i < Math.round(vote_average) / 2; i++) {
+      stars.push('full')
+    }
+
+    // check if there is any half star
+    if (vote_average % 2 !== 0) {
+      stars.push('half')
+    }
+
+    // check if there is any empty star
+    for (let i = 0; i < 5 - stars.length; i++) {
+      stars.push('empty')
+    }
+
+    // return the stars
+    return stars.map((star, index) => {
+      return <span key={index}>
+        {star === 'full' && <i className="fa-solid fa-star"></i>}
+        {star === 'half' && <i className="fa-solid fa-star-half-stroke"></i>}
+        {star === 'empty' && <i className="fa-regular fa-star"></i>}
+      </span>
+    })
   }
 
   return (
@@ -78,7 +108,7 @@ function App() {
               <p>{movie.original_title}</p>
               {flag(movie.original_language)}
               <div>
-                <span>{movie.vote_average}</span> ({movie.vote_count})
+                {starredVotes(movie.vote_average)} ({movie.vote_count})
               </div>
             </div>
           </li>
@@ -91,15 +121,15 @@ function App() {
         {TV.map((show) => {
           return <li key={show.id}>
             <div className="movieCard">
-              <h2>{show.title}</h2>
+              <h2>{show.name}</h2>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
-                alt={show.title}
+                alt={show.name}
               />
-              <p>{show.original_title}</p>
+              <p>{show.original_name}</p>
               {flag(show.original_language)}
               <div>
-                <span>{show.vote_average}</span> ({show.vote_count})
+                {starredVotes(show.vote_average)} ({show.vote_count})
               </div>
             </div>
           </li>
