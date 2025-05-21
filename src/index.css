@@ -9,7 +9,7 @@ body {
 /* Header */
 /* Netflix-style header */
 header {
-  width: 100%;
+  width: calc(100% - 72px);
   background: linear-gradient(90deg, #141414 80%, #222 100%);
   display: flex;
   justify-content: space-between;
@@ -112,13 +112,14 @@ h2 {
   color: #e50914;
 }
 
-ul {
+main ul {
   list-style: none;
-  padding: 0 0 0 16px;
+  padding-left: 16px;
   display: flex;
   overflow-x: auto;
+  overflow-y: visible;
   gap: 24px;
-  margin: 0 0 32px 0;
+  padding-bottom: 32px;
 }
 
 /* Netflix-style card */
@@ -188,7 +189,7 @@ ul {
 .movieCard-overlay p,
 .movieCard-overlay .overview {
   color: #ccc;
-  margin: 4px 0 0 0;
+  margin-top: 4px;
   max-height: 70px;
   overflow-y: auto;
   text-shadow: 0 2px 8px #000;
@@ -199,7 +200,7 @@ ul {
 }
 
 .movieCard-overlay div {
-  margin: 6px 0 0 0;
+  margin-top: 6px;
   font-size: 1rem;
   color: #fff;
   display: flex;
