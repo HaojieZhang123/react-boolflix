@@ -104,6 +104,34 @@ function App() {
     })
   }
 
+  const starVotes = (vote_average) => {
+    // alternative to starredVotes with less for cycles
+    // total stars to display
+    const total = 5;
+    const rating = Math.round(vote_average) / 2;
+
+    const stars = [];
+
+    for (let i = 0; i < total; i++) {
+      if (rating - i >= 1) {
+        stars.push('full');
+      } else if (rating - i === 0.5) {
+        stars.push('half');
+      } else {
+        stars.push('empty');
+      }
+    }
+
+    return stars.map((star, index) => {
+      return <span key={index} className="stars">
+        {star === 'full' && <i className="fa-solid fa-star"></i>}
+        {star === 'half' && <i className="fa-solid fa-star-half-stroke"></i>}
+        {star === 'empty' && <i className="fa-regular fa-star"></i>}
+      </span>
+    })
+
+  }
+
   return (
     <>
       <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -147,7 +175,7 @@ function App() {
                 <p><strong>Original name:</strong> {show.original_name}</p>
                 <div>
                   {flag(show.original_language)}
-                  {starredVotes(show.vote_average)} ({show.vote_count})
+                  {starVotes(show.vote_average)} ({show.vote_count})
                 </div>
                 <p className="overview">{show.overview}</p>
               </div>
