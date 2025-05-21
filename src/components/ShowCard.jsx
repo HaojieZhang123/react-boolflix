@@ -88,11 +88,10 @@ const ShowCard = ({ show }) => (
             alt={show.title || show.name}
         />
         <div className="movieCard-overlay">
-            <h2>{show.title || show.name}</h2>
+            <h3>{show.title || show.name}</h3>
             <p><strong>Original title:</strong> {show.original_title || show.original_name}</p>
             <div>
                 {flag(show.original_language)}
-                <br />
                 {starVotes(show.vote_average)} ({show.vote_count})
             </div>
             <p className="overview">{show.overview}</p>
