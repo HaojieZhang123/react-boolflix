@@ -6,32 +6,107 @@ body {
   min-height: 100vh;
 }
 
-input[type="text"] {
+/* Header */
+/* Netflix-style header */
+header {
+  width: 100%;
+  background: linear-gradient(90deg, #141414 80%, #222 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 36px;
+  height: 68px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Left header */
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.left-header img {
+  height: 40px;
+  margin-right: 18px;
+
+}
+
+.left-header nav ul {
+  display: flex;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.left-header nav ul li {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.left-header nav ul li:hover {
+  color: #e50914;
+}
+
+/* right header */
+.right-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* input */
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-container input[type="text"] {
   background: #222;
   color: #fff;
   border: none;
-  border-radius: 4px;
-  padding: 10px 16px;
-  margin: 20px 16px;
-  font-size: 1.1rem;
+  border-radius: 3px;
+  padding: 7px 14px;
+  font-size: 1rem;
   outline: none;
+  transition: all 0.2s;
 }
 
-button {
+.input-container input[type="text"]:focus {
+  background: #333;
+}
+
+.input-container button {
   background: #e50914;
   color: #fff;
   border: none;
-  border-radius: 4px;
-  padding: 10px 24px;
-  font-size: 1.1rem;
+  border-radius: 3px;
+  padding: 7px 18px;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-button:hover {
+.input-container button:hover {
   background: #b0060f;
 }
 
+.user-avatar img {
+  height: 36px;
+  border-radius: 4px;
+  border: 2px solid #fff;
+  background: #111;
+}
+
+/* Main */
 h2 {
   margin: 32px 0 16px 16px;
   font-size: 2rem;
